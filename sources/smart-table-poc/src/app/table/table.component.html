@@ -1,0 +1,31 @@
+<div class="bg-secondary" id="wrapper" style="height: 100vh;">
+
+    <div class="container">
+        <div class="card">
+            <div class="card-body">
+
+                <div class="row justify-content-end pb-1">
+                    <div class="col-md-3">
+                        <div class="input-group">
+                            <input #selectedPageInput class="form-control" type="text" id="selectedPageInput"
+                                name="selectedPageInput" [(ngModel)]="selectedPage">
+
+                            <div class="input-group-append">
+                                <button type="button" class="btn btn-secondary" (click)="selectPage(selectedPage)">Seite
+                                    auswählen</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <input #search class="form-control" type="text" placeholder="Tabelle durchsuchen..."
+                            (keyup)="onSearch(search.value)">
+                    </div>
+                </div>
+
+                <ng2-smart-table [settings]="settings" [source]="source"></ng2-smart-table>
+
+            </div>
+        </div>
+    </div>
+
+</div>
