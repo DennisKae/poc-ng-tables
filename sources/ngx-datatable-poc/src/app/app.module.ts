@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { TableComponent } from './table/table.component';
 import { BasicTableComponent } from './basic-table/basic-table.component';
+import { BsDropdownModule } from 'ngx-bootstrap';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { BasicTableComponent } from './basic-table/basic-table.component';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    NgxDatatableModule
+    NgxDatatableModule,
+    BsDropdownModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -10,7 +10,29 @@ $fa-font-path: "../node_modules/@fortawesome/fontawesome-free/webfonts";
 @import '../node_modules/@swimlane/ngx-datatable/themes/bootstrap.scss';
 @import '../node_modules/@swimlane/ngx-datatable/assets/icons.css';
 
-.datatable-footer {
-    background: white;
-    color: black;
+.ngx-datatable.bootstrap{
+
+    .datatable-footer {
+        background: transparent; // #424242
+        color: $gray-800; // #ededed;
+        .datatable-pager {
+            ul {
+              li {
+                &:not(.disabled) {
+                  &.active,
+                  &:hover {
+                    a {
+                      background-color: $gray-400; // #545454;
+                      color: black;
+                      font-weight: bold;
+                    }
+                  }
+                }
+              }
+            }
+            a {
+                color: $gray-800; // #ededed;
+            }
+        }
+    }
 }

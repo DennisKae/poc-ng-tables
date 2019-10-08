@@ -1,40 +1,123 @@
-<div class="bg-secondary" id="wrapper" style="min-height: 100vh;">
+<div class="bg-secondary container-fluid" id="wrapper" style="min-height: 100vh;">
+    <div class="row">
+        <div class="col-lg-8 offset-1 pt-5">
 
-    <div class="container pt-5">
-        <div class="card">
-            <div class="card-body">
-                <div class="border">
-                    <div class="row justify-content-between border-bottom mx-0 pt-2">
-                        <div class="col-lg-3">
-                            <div class="form-group row mb-0">
-                                <label for="limitSelectInput" class="col-form-label col-8">Anzahl Elemente</label>
-                                <div class="col-4">
-                                    <select class="form-control form-control-sm" id="limitSelectInput"
-                                        name="limitSelectInput" [(ngModel)]="limit">
-                                        <option>10</option>
-                                        <option>20</option>
-                                        <option>30</option>
-                                        <option>50</option>
-                                    </select>
-                                </div>
+            <div class="card">
+                <div class="card-body">
+                    <div class="border">
+                        <div class="row justify-content-between border-bottom mx-0 pt-2">
+                            <div class="col-lg-3">
+                                <!-- <div class="form-group row mb-0">
+                                    <label for="limitSelectInput" class="col-form-label col-8">Anzahl Elemente</label>
+                                    <div class="col-4">
+                                        <select class="form-control form-control-sm" id="limitSelectInput"
+                                            name="limitSelectInput" [(ngModel)]="limit">
+                                            <option>10</option>
+                                            <option>20</option>
+                                            <option>30</option>
+                                            <option>50</option>
+                                        </select>
+                                    </div>
+                                </div> -->
+                            </div>
+
+                            <div class="col-lg-3 pt-1 pb-2">
+                                <input type="text" class="form-control form-control-sm"
+                                    placeholder="Filter names and companies..." (keyup)="updateFilter($event)" />
                             </div>
                         </div>
 
-                        <div class="col-lg-3">
-                            <input type="text" class="form-control form-control-sm" placeholder="Type to filter..."
-                                (keyup)="updateFilter($event)" />
+                        <div>
+                            <!-- [columns]="columns" [rowHeight]="50"-->
+                            <ngx-datatable #table class="bootstrap" style="height: 75vh" [rows]="rows | async"
+                                [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [limit]="limit"
+                                [columnMode]="columnMode" [sorts]="sorts" [sortType]="sortType" [scrollbarV]="true"
+                                [selected]="selected" [selectionType]="selectionType" (activate)="onActivate($event)"
+                                (select)="onSelect($event)">
+
+                                <ngx-datatable-column [width]="30" [sortable]="false" [canAutoResize]="false"
+                                    [draggable]="false" [resizeable]="false">
+                                    <ng-template ngx-datatable-header-template let-value="value"
+                                        let-allRowsSelected="allRowsSelected" let-selectFn="selectFn">
+                                        <input type="checkbox" [checked]="allRowsSelected"
+                                            (change)="selectFn(!allRowsSelected)" />
+                                    </ng-template>
+                                    <ng-template ngx-datatable-cell-template let-value="value"
+                                        let-isSelected="isSelected" let-onCheckboxChangeFn="onCheckboxChangeFn">
+
+                                        <input type="checkbox" [checked]="isSelected"
+                                            (change)="onCheckboxChangeFn($event)" />
+
+                                        <!-- <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="customCheck1">
+                                            <label class="custom-control-label" for="customCheck1"></label>
+                                        </div> -->
+
+                                    </ng-template>
+                                </ngx-datatable-column>
+
+
+                                <ngx-datatable-column *ngFor="let col of columns" [name]="col.name">
+                                </ngx-datatable-column>
+
+                                <ngx-datatable-column name="Actions" [width]="100" [sortable]="false"
+                                    [canAutoResize]="false" [draggable]="false" [resizeable]="false">
+
+                                    <ng-template ngx-datatable-cell-template let-row="row">
+                                        <div class="btn-group" dropdown container="body">
+                                            <button dropdownToggle type="button"
+                                                class="btn btn-sm btn-info dropdown-toggle">
+                                                Actions
+                                            </button>
+                                            <div class="dropdown-menu" *dropdownMenu>
+                                                <button type="button" class="dropdown-item disabled"
+                                                    [innerHTML]="row['name']"></button>
+                                                <div class="dropdown-divider"></div>
+                                                <button type="button" class="dropdown-item" (click)="editUser(row)">
+                                                    Edit this user
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </ng-template>
+                                </ngx-datatable-column>
+                            </ngx-datatable>
                         </div>
                     </div>
+                </div>
+            </div>
 
-                    <div>
-                        <ngx-datatable #table class="bootstrap" style="height: 75vh" [rows]="rows | async"
-                            [columns]="columns" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [limit]="limit"
-                            [columnMode]="ColumnMode.force" [scrollbarV]="true">
-                        </ngx-datatable>
-                    </div>
+        </div>
+
+        <div class="col-lg-2 pt-5">
+            <div class="card mb-2">
+                <div class="card-body">
+                    <h4>Available Columns</h4>
+                    <ul>
+                        <li *ngFor="let col of allColumns">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" [id]="col.name"
+                                    (click)="toggle(col)" [checked]="isChecked(col)">
+                                <label class="custom-control-label" [attr.for]="col.name">{{ col.name }}</label>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-body">
+                    <h4>
+                        Selections <small *ngIf="selected?.length">({{ selected?.length }})</small>
+                    </h4>
+                    <ul>
+                        <li *ngFor="let sel of selected">
+                            {{ sel.name }}
+                        </li>
+                        <li *ngIf="!selected?.length">No Selections</li>
+                    </ul>
+
                 </div>
             </div>
         </div>
     </div>
-
 </div>
