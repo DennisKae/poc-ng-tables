@@ -74,11 +74,17 @@
                                 <ngx-datatable-column *ngFor="let col of columns" [name]="col.name">
                                 </ngx-datatable-column>
 
+                                <ngx-datatable-column name="Birthday">
+                                    <ng-template ngx-datatable-cell-template let-value="value">
+                                        {{value|date:'dd.MM.yyyy'}}
+                                    </ng-template>
+                                </ngx-datatable-column>
+
                                 <ngx-datatable-column name="Actions" [width]="100" [sortable]="false"
-                                    [canAutoResize]="false" [draggable]="false" [resizeable]="false">
+                                    [canAutoResize]="false" [draggable]="false" [resizeable]="false" cellClass="py-0">
 
                                     <ng-template ngx-datatable-cell-template let-row="row">
-                                        <div class="btn-group" dropdown container="body" style="margin-top: -3px;">
+                                        <div class="btn-group mt-2" dropdown container="body">
                                             <button dropdownToggle type="button"
                                                 class="btn btn-sm btn-info dropdown-toggle">
                                                 Actions

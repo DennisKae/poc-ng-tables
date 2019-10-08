@@ -25,6 +25,7 @@ export class TableComponent implements OnInit {
     { name: 'Company' }
   ];
 
+  // Required for the column selection
   allColumns: TableColumn[] = [
     { name: 'Name' },
     { name: 'Gender' },
