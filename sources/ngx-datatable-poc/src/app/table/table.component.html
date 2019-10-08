@@ -1,0 +1,40 @@
+<div class="bg-secondary" id="wrapper" style="min-height: 100vh;">
+
+    <div class="container pt-5">
+        <div class="card">
+            <div class="card-body">
+                <div class="border">
+                    <div class="row justify-content-between border-bottom mx-0 pt-2">
+                        <div class="col-lg-3">
+                            <div class="form-group row mb-0">
+                                <label for="limitSelectInput" class="col-form-label col-8">Anzahl Elemente</label>
+                                <div class="col-4">
+                                    <select class="form-control form-control-sm" id="limitSelectInput"
+                                        name="limitSelectInput" [(ngModel)]="limit">
+                                        <option>10</option>
+                                        <option>20</option>
+                                        <option>30</option>
+                                        <option>50</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3">
+                            <input type="text" class="form-control form-control-sm" placeholder="Type to filter..."
+                                (keyup)="updateFilter($event)" />
+                        </div>
+                    </div>
+
+                    <div>
+                        <ngx-datatable #table class="bootstrap" style="height: 75vh" [rows]="rows | async"
+                            [columns]="columns" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [limit]="limit"
+                            [columnMode]="ColumnMode.force" [scrollbarV]="true">
+                        </ngx-datatable>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

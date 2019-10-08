@@ -1,0 +1,16 @@
+@import '../node_modules/bootstrap/scss/bootstrap.scss';
+
+$fa-font-path: "../node_modules/@fortawesome/fontawesome-free/webfonts";
+@import '../node_modules/@fortawesome/fontawesome-free/scss/fontawesome.scss';
+@import '../node_modules/@fortawesome/fontawesome-free/scss/solid.scss';
+
+
+
+@import '../node_modules/@swimlane/ngx-datatable/index.css';
+@import '../node_modules/@swimlane/ngx-datatable/themes/bootstrap.scss';
+@import '../node_modules/@swimlane/ngx-datatable/assets/icons.css';
+
+.datatable-footer {
+    background: white;
+    color: black;
+}
