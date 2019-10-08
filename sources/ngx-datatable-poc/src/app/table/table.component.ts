@@ -104,4 +104,12 @@ export class TableComponent implements OnInit {
       }) !== undefined
     );
   }
+
+  removeSpaces(input: string): string {
+    if (!input || input === undefined) {
+      return input;
+    }
+
+    return input.replace(" ", "");
+  }
 }

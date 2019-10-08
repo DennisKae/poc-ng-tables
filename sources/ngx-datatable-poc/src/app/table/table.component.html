@@ -41,8 +41,16 @@
                                         let-allRowsSelected="allRowsSelected" let-selectFn="selectFn">
                                         <input type="checkbox" [checked]="allRowsSelected"
                                             (change)="selectFn(!allRowsSelected)" />
+
+                                        <!-- <div class="height: 1rem;">
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="checkAllRows"
+                                                    [checked]="allRowsSelected" (change)="selectFn(!allRowsSelected)">
+                                                <label class="custom-control-label" for="checkAllRows"></label>
+                                            </div>
+                                        </div> -->
                                     </ng-template>
-                                    <ng-template ngx-datatable-cell-template let-value="value"
+                                    <ng-template ngx-datatable-cell-template let-row="row" let-value="value"
                                         let-isSelected="isSelected" let-onCheckboxChangeFn="onCheckboxChangeFn">
 
                                         <input type="checkbox" [checked]="isSelected"
@@ -53,6 +61,12 @@
                                             <label class="custom-control-label" for="customCheck1"></label>
                                         </div> -->
 
+                                        <!-- <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" [checked]="isSelected"
+                                                (change)="onCheckboxChangeFn($event)" [id]="removeSpaces(row.name)">
+                                            <label class="custom-control-label"
+                                                [attr.for]="removeSpaces(row.name)"></label>
+                                        </div> -->
                                     </ng-template>
                                 </ngx-datatable-column>
 
