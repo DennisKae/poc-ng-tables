@@ -21,7 +21,13 @@ import { BsDropdownModule } from 'ngx-bootstrap';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    NgxDatatableModule,
+    NgxDatatableModule.forRoot({
+      messages: {
+        emptyMessage: 'Keine Daten gefunden.',
+        totalMessage: 'Datensätze ausgewählt',
+        selectedMessage: ' '        
+      }
+    }),
     BsDropdownModule.forRoot()
   ],
   providers: [],
